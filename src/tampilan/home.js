@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View,Button } from 'react-native'
 
-export default class home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
-  render() {
-    return (
-      <View>
-        <Text> home </Text>
-      </View>
-    );
-  }
+const home = () => {
+  return (
+    <View>
+      <Button
+        title="Go to form"
+        onPress={() => this.props.navigation.navigate('form')}
+      />
+    </View>
+  )
 }
+
+export default home
+
+const styles = StyleSheet.create({})
+
