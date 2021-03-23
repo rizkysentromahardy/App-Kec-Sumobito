@@ -9,7 +9,8 @@ const Stack = createStackNavigator();
 function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" >
+      <Stack.Navigator initialRouteName="Splash"
+      headerMode={'none'} >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}}/>
         <Stack.Screen name="form" component={Form} />
