@@ -1,20 +1,20 @@
 import React from 'react'
-import { StyleSheet, TextInput, Text } from 'react-native'
-
-const InputData = ({ label, placeholder, keyboardType, isTextArea}) => {
+import { StyleSheet, TextInput, Text, Button } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+const InputData = ({ label, placeholder, keyboardType, isTextArea }) => {
     if (isTextArea) {
-        return(
+        return (
             <>
-            <Text style={styles.label}>{label}</Text>
-            <TextInput
-                multiline={true}
-                numberOfLines={4}
-                style={styles.textArea}
-                placeholder={placeholder}
-                keyboardType={keyboardType}
-            >
-            </TextInput>
-        </>
+                <Text style={styles.label}>{label}</Text>
+                <TextInput
+                    multiline={true}
+                    numberOfLines={4}
+                    style={styles.textArea}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                >
+                </TextInput>
+            </>
         )
     }
 
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 2,
         margin: 3,
-        textAlignVertical:'top'
+        textAlignVertical: 'top'
     }
 })
