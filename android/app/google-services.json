@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "10073039983",
+    "firebase_url": "https://skripsi-eb60a-default-rtdb.firebaseio.com",
+    "project_id": "skripsi-eb60a",
+    "storage_bucket": "skripsi-eb60a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10073039983:android:6e8a439622748459d8599a",
+        "android_client_info": {
+          "package_name": "com.pengaduan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10073039983-7lc5qdjkb2ievrcto8bahpiosrdari6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxOdcA44phJWhMByBFWFXe8kQ_l24ceYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "10073039983-7lc5qdjkb2ievrcto8bahpiosrdari6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
