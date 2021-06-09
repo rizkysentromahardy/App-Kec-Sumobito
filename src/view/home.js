@@ -20,6 +20,7 @@ import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
 import axios from 'axios'
 import { RadioButton } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from 'react-native-splash-screen'
 
 const screen = Dimensions.get('window')
 
@@ -31,6 +32,8 @@ function home(props) {
   const [Telp, setTelp] = useState('')
   const [Catatan, setCatatan] = useState('')
   const [Loading, setLoading] = useState(false)
+
+
 
   useEffect(() => {
     let task = InteractionManager.runAfterInteractions(() => {
@@ -45,6 +48,7 @@ function home(props) {
 
             }
           }
+          SplashScreen.hide();
         } catch (error) {
           console.log(error);
         }

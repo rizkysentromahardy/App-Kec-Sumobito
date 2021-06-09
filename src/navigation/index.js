@@ -10,7 +10,7 @@ function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="home"
+        initialRouteName="Home"
         headerMode={'none'} >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="chatting" component={Chatting} />
