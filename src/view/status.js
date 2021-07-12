@@ -6,7 +6,7 @@ import {
     Dimensions,
     ActivityIndicator,
     Image,
-    Text, View, InteractionManager, LogBox, Alert
+    Text, View, InteractionManager, LogBox, Alert, SafeAreaView
 } from 'react-native'
 import Timeline from 'react-native-timeline-flatlist'
 import axios from 'axios'
@@ -41,10 +41,19 @@ const status = (props) => {
     }, []))
 
     useEffect(() => {
-        LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
-    }, [])
+        // LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
+        var loop = setInterval(()=>{
+            getData(obj.id)
+            },1000)
+    },[]);
     const getData = (kode) => {
-        axios.get(`http://192.168.43.6/admin/main/config/cekstatus.php?kode=${kode}`).then((result) => {
+        console.log('get data ', kode);
+        axios.get(`http://192.168.43.6/admin/main/config/cekstatus.php?kode=${kode}`,{
+            headers:{
+                "Cookie":"__test=e50407cd378b4de62c115cb041abe710"
+            },
+            timeout: 10000
+        }).then((result) => {
             console.log('sukses: ', result.data);
             setData(result.data);
             setRefreshing(false)
@@ -52,7 +61,8 @@ const status = (props) => {
             setRefreshing(false);
             console.log('gagal: ', error);
         }).finally(() => {
-            setLoading(false)
+            setLoading(false);
+            setRefreshing(false);
         })
     }
 
@@ -168,6 +178,7 @@ const status = (props) => {
         setRefreshing(true);
         if (idpengaduan) {
             // setLoading(true)
+            // console.log('iki reload');
             getData(idpengaduan)
         }
     }, [])
@@ -192,7 +203,7 @@ const status = (props) => {
     return (
         <View style={{ flex: 1 }}>
 
-            <ScrollView style={styles.container}
+            <View style={styles.container}
                 refreshControl={
                     <RefreshControl
                         refreshing={refreshing}
@@ -210,7 +221,7 @@ const status = (props) => {
                         }}
                     />
                 </View>
-                <Text style={{ color: '#4a4a4a' }}>kode pengaduan ({kodeTiket})</Text>
+                <Text style={{ color: '#4a4a4a',fontSize:20, fontWeight:'bold'}}>kode pengaduan ({kodeTiket})</Text>
                 <Timeline style={styles.list}
                     data={statusdata}
                     showTime={false}
@@ -227,7 +238,19 @@ const status = (props) => {
                             : undefined
                     }
                 </View>
-            </ScrollView>
+                <View >
+                    {
+                        checkBottomStatus(checkNama(data?.filter(o => o.nama == 'selesai')))?
+                    <Text style= {styles.notif}>
+                        Silahkan Ambil Berkas di Kecamatan !!
+                        Berserta Berkas Pendukung
+                        
+                    </Text>
+                    :undefined
+                    }
+                </View>
+            </View>
+            
             <View style={{ backgroundColor: 'smoke', paddingVertical: 20 }}>
                 <TouchableOpacity
                     onPress={() => onDone()}
@@ -268,5 +291,11 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: '#666666',
         fontSize: 12,
+    },
+    notif:{
+        fontStyle:'italic',
+        fontSize:18,
+        textAlign:'center',
+        color:'red',
     }
 })

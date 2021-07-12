@@ -102,7 +102,8 @@ function home(props) {
       data: formData,
       headers: {
         Accept: "application/json",
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        "Cookie":"__test=e50407cd378b4de62c115cb041abe710"
       }
     }).then(async (rsp) => {
       console.log('iki respone: ', rsp.data);
@@ -129,7 +130,7 @@ function home(props) {
       quality: 0.7
     }
     launchImageLibrary(options, (response) => {
-      console.log('error')
+      // console.log('error')
       if (response.didCancel) {
         console.log('User cancelled image picker')
       } else if (response.error) {
@@ -153,16 +154,16 @@ function home(props) {
       <View>
         <Text style={styles.form}>Form Pengaduan</Text>
       </View>
-      <InputData label='Full Name' placeholder='Masukan Nama' onChangeText={setNama} />
-      <InputData label='Phone Number' placeholder='Masukan No. Hp' keyboardType='number-pad' onChangeText={setTelp} />
-      <InputData label='Address' placeholder='Masukan Alamat' isTextArea={true} onChangeText={setAlamat} />
+      <InputData label='Nama Lengkap' placeholder='Masukan Nama' onChangeText={setNama} />
+      <InputData label='Nomer Telp' placeholder='Masukan No. Hp' keyboardType='number-pad' onChangeText={setTelp} />
+      <InputData label='Alamat' placeholder='Masukan Alamat' isTextArea={true} onChangeText={setAlamat} />
       <View>
         <Text style={styles.label}>Jenis Laporan</Text>
         <View style={styles.radio}>
           <RadioButton
-            value="kk"
-            status={Jenis === 'kk' ? 'checked' : 'unchecked'}
-            onPress={() => setJenis('kk')}
+            value="KK"
+            status={Jenis === 'KK' ? 'checked' : 'unchecked'}
+            onPress={() => setJenis('KK')}
           />
           <Text style={styles.slct}> KK
             </Text>
@@ -170,9 +171,9 @@ function home(props) {
         <View style={styles.radio}>
           <RadioButton
             color="red"
-            value="ktp"
-            status={Jenis === 'ktp' ? 'checked' : 'unchecked'}
-            onPress={() => setJenis('ktp')}
+            value="KTP"
+            status={Jenis === 'KTP' ? 'checked' : 'unchecked'}
+            onPress={() => setJenis('KTP')}
           />
           <Text style={styles.slct}> KTP</Text>
         </View>
@@ -181,6 +182,7 @@ function home(props) {
         <InputData label='Catatan Keterangan' placeholder='Keterangan' isTextArea={true} onChangeText={setCatatan} />
       </View>
       <Text style={styles.label}>Upload Gambar KK / KTP</Text>
+      <TouchableOpacity onPress={onPick}>
       <ImageBackground source={ImgPic ? { uri: ImgPic.uri } : undefined}
         style={{
           height: styles.img.height,
@@ -195,7 +197,6 @@ function home(props) {
 
         }}
       >
-        <TouchableOpacity onPress={onPick}>
           {
             ImgPic == null ?
               <View style={[styles.img, { backgroundColor: 'transparent' }]}>
@@ -203,8 +204,8 @@ function home(props) {
               </View>
               : undefined
           }
-        </TouchableOpacity>
       </ImageBackground>
+        </TouchableOpacity>
       <View>
         {
           Loading ?
