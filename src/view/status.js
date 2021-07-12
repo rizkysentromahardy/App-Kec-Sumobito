@@ -28,29 +28,75 @@ const status = (props) => {
     useFocusEffect(useCallback(() => {
 
         let task = InteractionManager.runAfterInteractions(async () => {
+            
             let kode = await AsyncStorage.getItem('kode');
-            // console.log('kode :', JSON.parse(kode));
-            let obj = JSON.parse(kode)
-            setIdPengaduan(obj.id)
-            setKodeTiket(obj.kode)
-            getData(obj.id)
+
+            if (kode != null) {
+
+                let obj = JSON.parse(kode)
+
+                // SET VALUE KE USESTATE
+                setIdPengaduan(obj.id)
+                setKodeTiket(obj.kode)
+                getData(obj.id)
+                
+            }
+            
         });
         return () => {
             task.cancel();
         }
-    }, []))
+    }, []));
 
     useEffect(() => {
-        // LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
-        var loop = setInterval(()=>{
-            getData(obj.id)
-            },1000)
-    },[]);
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
+        
+        
+        var loop = null;
+        
+        const autoRefreshData = async () => {
+
+            // AMBIL DATA USER DARI STORAGE
+            let kode = await AsyncStorage.getItem('kode');
+            
+            // CEK KONDISI VALUE DARI KODE JIKA TIDAK SAMA DENGAN NULL INTERVAL DIJALANKAN
+            if (kode != null) {
+                
+                // DARI DATA YG DIAMBIL BERUPA STRING DI KONVERSI KE JSON
+                let obj = JSON.parse(kode);
+
+                // MENJALANKAN INTERVAL
+                loop = setInterval(() => {
+                    getData(obj.id)
+                }, 1000);
+            }
+        }
+
+        // MENJALANKAN TUGAS SETELAH SELESAI ANIMASI BERJALAN
+        let task = InteractionManager.runAfterInteractions(() => {
+            autoRefreshData()
+        })
+
+        return () => {
+
+            if (loop) {
+                // MENGHENTIKAN INTERVAL
+                clearInterval(loop);
+            }
+
+            if (task) {
+                // MENGHENTIKAN SEMUA TUGAS DI DALAM VAR TASK
+                task.cancel()
+            }
+        }
+    }, []);
+
+    // MENGAMBIL DATA DARI SERVER
     const getData = (kode) => {
         console.log('get data ', kode);
-        axios.get(`http://192.168.43.6/admin/main/config/cekstatus.php?kode=${kode}`,{
-            headers:{
-                "Cookie":"__test=e50407cd378b4de62c115cb041abe710"
+        axios.get(`http://192.168.43.6/admin/main/config/cekstatus.php?kode=${kode}`, {
+            headers: {
+                "Cookie": "__test=e50407cd378b4de62c115cb041abe710"
             },
             timeout: 10000
         }).then((result) => {
@@ -221,7 +267,7 @@ const status = (props) => {
                         }}
                     />
                 </View>
-                <Text style={{ color: '#4a4a4a',fontSize:20, fontWeight:'bold'}}>kode pengaduan ({kodeTiket})</Text>
+                <Text style={{ color: '#4a4a4a', fontSize: 20, fontWeight: 'bold' }}>kode pengaduan ({kodeTiket})</Text>
                 <Timeline style={styles.list}
                     data={statusdata}
                     showTime={false}
@@ -240,17 +286,17 @@ const status = (props) => {
                 </View>
                 <View >
                     {
-                        checkBottomStatus(checkNama(data?.filter(o => o.nama == 'selesai')))?
-                    <Text style= {styles.notif}>
-                        Silahkan Ambil Berkas di Kecamatan !!
-                        Berserta Berkas Pendukung
-                        
-                    </Text>
-                    :undefined
+                        checkBottomStatus(checkNama(data?.filter(o => o.nama == 'selesai'))) ?
+                            <Text style={styles.notif}>
+                                Silahkan Ambil Berkas di Kecamatan !!
+                                Berserta Berkas Pendukung
+
+                            </Text>
+                            : undefined
                     }
                 </View>
             </View>
-            
+
             <View style={{ backgroundColor: 'smoke', paddingVertical: 20 }}>
                 <TouchableOpacity
                     onPress={() => onDone()}
@@ -292,10 +338,10 @@ const styles = StyleSheet.create({
         color: '#666666',
         fontSize: 12,
     },
-    notif:{
-        fontStyle:'italic',
-        fontSize:18,
-        textAlign:'center',
-        color:'red',
+    notif: {
+        fontStyle: 'italic',
+        fontSize: 18,
+        textAlign: 'center',
+        color: 'red',
     }
 })
