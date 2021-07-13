@@ -172,22 +172,22 @@ const status = (props) => {
         if (data.length > 0) {
             return [
                 {
-                    time: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).format('HH:mm') : '-',
-                    title: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).format('dddd, DD MMM YYYY HH:mm ') : '-',
+                    time: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).local().format('HH:mm') : '-',
+                    title: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).local().format('dddd, DD MMM YYYY HH:mm ') : '-',
                     description: 'Pengaduan di terima',
                     lineColor: '#b3b3b3',
                     circleColor: checkColorDot(checkNama(data.filter(o => o.nama == 'pending')))
                 },
                 {
-                    time: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).format('HH:mm') : '-',
-                    title: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).format('dddd, DD MMM YYYY HH:mm ') : '-',
+                    time: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).local().format('HH:mm') : '-',
+                    title: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).local().format('dddd, DD MMM YYYY HH:mm ') : '-',
                     description: 'Sedang di Proses',
                     lineColor: '#b3b3b3',
                     circleColor: checkColorDot(checkNama(data.filter(o => o.nama == 'proses'))),
                 },
                 {
-                    time: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).format('HH:mm') : '-',
-                    title: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).format('dddd, DD MMM YYYY HH:mm ') : '-',
+                    time: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).local().format('HH:mm') : '-',
+                    title: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).local().format('dddd, DD MMM YYYY HH:mm ') : '-',
                     description: 'Selesai',
                     lineColor: '#b3b3b3',
                     circleColor: checkColorDot(checkNama(data.filter(o => o.nama == 'selesai')))
