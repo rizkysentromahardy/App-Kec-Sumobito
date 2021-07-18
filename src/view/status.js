@@ -94,7 +94,7 @@ const status = (props) => {
     // MENGAMBIL DATA DARI SERVER
     const getData = (kode) => {
         console.log('get data ', kode);
-        axios.get(`http://192.168.43.6/admin/main/config/cekstatus.php?kode=${kode}`, {
+        axios.get(`https://kecsumobito.000webhostapp.com/config/cekstatus.php?kode=${kode}`, {
             headers: {
                 "Cookie": "__test=e50407cd378b4de62c115cb041abe710"
             },
@@ -172,22 +172,22 @@ const status = (props) => {
         if (data.length > 0) {
             return [
                 {
-                    time: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).format('HH:mm') : '-',
-                    title: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).format('dddd, DD MMM YYYY HH:mm ') : '-',
-                    description: 'Pengaduan di terima',
+                    time: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).format('') : '-',
+                    title: checkDate(data.filter(o => o.nama == 'pending')) ? moment(checkDate(data.filter(o => o.nama == 'pending'))).format('dddd, DD MMM YYYY ') : '-',
+                    description: 'Pengaduan diterima',
                     lineColor: '#b3b3b3',
                     circleColor: checkColorDot(checkNama(data.filter(o => o.nama == 'pending')))
                 },
                 {
-                    time: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).format('HH:mm') : '-',
-                    title: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).format('dddd, DD MMM YYYY HH:mm ') : '-',
-                    description: 'Sedang di Proses',
+                    time: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).format('') : '-',
+                    title: checkDate(data.filter(o => o.nama == 'proses')) ? moment(checkDate(data.filter(o => o.nama == 'proses'))).format('dddd, DD MMM YYYY ') : '-',
+                    description: 'Sedang diproses',
                     lineColor: '#b3b3b3',
                     circleColor: checkColorDot(checkNama(data.filter(o => o.nama == 'proses'))),
                 },
                 {
-                    time: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).format('HH:mm') : '-',
-                    title: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).format('dddd, DD MMM YYYY HH:mm ') : '-',
+                    time: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).format('') : '-',
+                    title: checkDate(data.filter(o => o.nama == 'selesai')) ? moment(checkDate(data.filter(o => o.nama == 'selesai'))).format('dddd, DD MMM YYYY ') : '-',
                     description: 'Selesai',
                     lineColor: '#b3b3b3',
                     circleColor: checkColorDot(checkNama(data.filter(o => o.nama == 'selesai')))

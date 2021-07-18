@@ -97,7 +97,7 @@ function home(props) {
     // console.log(JSON.stringify(formData));
     setLoading(true)
     axios({
-      url: 'http://192.168.43.6/admin/main/config/createdata.php',
+      url: 'https://kecsumobito.000webhostapp.com/config/createdata.php',
       method: 'POST',
       data: formData,
       headers: {
@@ -150,6 +150,9 @@ function home(props) {
   return (
     <ScrollView
      style={styles.container} contentContainerStyle={{ padding: 17 }}>
+       <View style= {{ transform :[{rotate:"45deg"}],paddingTop:40,paddingLeft:40,}}>
+        <Text style= {styles.watermark}>Test</Text>
+      </View>
       <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
       <View>
         <Text style={styles.form}>Form Pengaduan</Text>
@@ -303,6 +306,15 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     fontWeight: 'bold',
     color: '#848C97'
+  },
+  watermark:{
+    position:'absolute',
+    backgroundColor:'blue',
+    color:'white',
+    fontSize:25,
+    // position:'absolute',
+    textAlign:'center',
+    top: -80, left: 135 , right: -80, bottom: 80, 
+
   }
 })
-
