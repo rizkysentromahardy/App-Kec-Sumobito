@@ -148,6 +148,7 @@ function home(props) {
   }
 
   return (
+    
     <ScrollView
      style={styles.container} contentContainerStyle={{ padding: 17 }}>
        <View style= {{ transform :[{rotate:"45deg"}],paddingTop:40,paddingLeft:40,}}>
